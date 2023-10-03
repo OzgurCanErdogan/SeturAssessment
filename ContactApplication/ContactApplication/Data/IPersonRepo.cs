@@ -4,13 +4,13 @@ namespace ContactApplication.Data
 {
     public interface IPersonRepo
     {
-        bool SaveChanges();
+
         void CreatePerson(Person person);
         void DeletePerson(Guid person);
         IEnumerable<Person> GetAll();
-        Person GetPerson(Guid id);
-
-
+        Person GetPersonById(Guid id);
+        bool PersonExists(Guid id);
+        Person GetPersonDetailedById(Guid id);
 
 
     }

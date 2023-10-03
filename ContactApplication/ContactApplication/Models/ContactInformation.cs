@@ -18,7 +18,7 @@ namespace ContactApplication.Models
         [AllowNull]
         public string Location { get; set; }
 
-        [AllowNull]
+
         public virtual Person Person { get; set; }
     }
 }

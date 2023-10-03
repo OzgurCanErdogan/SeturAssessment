@@ -17,5 +17,8 @@ namespace ContactApplication.Models
         [Required]
         [AllowNull]
         public string CompanyName { get; set; }
+
+
+        public virtual ICollection<ContactInformation> ContactInformation { get; set; }
     }
 }

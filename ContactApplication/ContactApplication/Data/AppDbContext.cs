@@ -9,18 +9,20 @@ namespace ContactApplication.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
-
+            this.Database.EnsureCreated();
         }
-        public DbSet<Person> People { get; set; }
+        public DbSet<Person> Person { get; set; }
         public DbSet<ContactInformation> ContactInformation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ContactInformation>()
                 .HasOne(c => c.Person)
-                .WithMany()
+                .WithMany(p => p.ContactInformation)
                 .HasForeignKey(c => c.PersonId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

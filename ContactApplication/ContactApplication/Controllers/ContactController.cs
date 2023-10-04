@@ -83,12 +83,12 @@ namespace ContactApplication.Controllers
 
             var contact = _mapper.Map<ContactInformation>(createDto);
 
-            _contactRepo.AddContactInformation(contact, personId);
-            _contactRepo.SaveChanges();
+            //_contactRepo.AddContactInformation(contact, personId);
+            //_contactRepo.SaveChanges();
 
-            
-            //var createdPersonDto = _mapper.Map<PersonReadDto>(person);
-            return Ok(_contactRepo.GetPersonDetailedById(personId));
+            var detailed = _contactRepo.GetPersonDetailedById(personId);
+            var createdPersonDetailedDto = _mapper.Map<PersonContactDetailedReadDto>(detailed);
+            return Ok(createdPersonDetailedDto);
         }
 
         [HttpDelete(Name = "DeleteContactInformation")]

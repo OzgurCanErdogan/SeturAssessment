@@ -8,6 +8,6 @@ namespace ContactApplication.Dtos
         public string Name { get; set; }
         public string Surname { get; set; }
         public string CompanyName { get; set; }
-        ICollection<ContactInformation> ContactInformation { get; set; }
+        public List<ContactInformationReadDto> ContactInformation { get; set; }
     }
 }

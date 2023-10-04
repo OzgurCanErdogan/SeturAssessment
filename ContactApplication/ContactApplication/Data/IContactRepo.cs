@@ -2,6 +2,6 @@
 {
     public interface IContactRepo : IPersonRepo, IContactInformationRepo
     {
-        bool SaveChanges();
+        //bool SaveChanges();
     }
 }

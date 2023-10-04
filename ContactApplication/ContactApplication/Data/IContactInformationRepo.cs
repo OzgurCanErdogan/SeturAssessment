@@ -8,5 +8,6 @@ namespace ContactApplication.Data
         void AddContactInformation(ContactInformation contactInformation, Guid personId);
         void DeleteContactInformation(Guid contactInformationId, Guid personId);
         bool ContactInformationExists(Guid id);
+        IEnumerable<ContactInformation> GetAllContactInformation();
     }
 }

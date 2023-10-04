@@ -24,11 +24,15 @@ namespace ContactApplication.Data
                 throw new ArgumentNullException(nameof(person));
             }
             _context.Person.Add(person);
+            SaveChanges();
+
+            //return person;
         }
         public void DeletePerson(Guid id)
         {
             Person deletePerson = GetPersonById(id);
             _context.Person.Remove(deletePerson);
+            SaveChanges();
         }
 
         public Person GetPersonById(Guid id)
@@ -60,7 +64,7 @@ namespace ContactApplication.Data
                 contact.Person = tempPerson;
                 //tempPerson.ContactInformation.Add(contact);
                 _context.ContactInformation.Add(contact);
-                
+                SaveChanges();
 
             }
         }
@@ -71,7 +75,9 @@ namespace ContactApplication.Data
             {
                 ContactInformation deleteInformation = GetContactInformation(contactInformationId);
                 _context.ContactInformation.Remove(deleteInformation);
-                
+                SaveChanges();
+
+
             }
 
         }
@@ -81,7 +87,12 @@ namespace ContactApplication.Data
             return _context.ContactInformation.Any(p => p.Id == id);
         }
 
-        public bool SaveChanges()
+        public IEnumerable<ContactInformation> GetAllContactInformation()
+        {
+            return _context.ContactInformation.ToList();
+        }
+
+        private bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
         }

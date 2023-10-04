@@ -28,7 +28,7 @@ namespace ContactApplication.Controllers
         {
             var person = _mapper.Map<Person>(personData);
             _contactRepo.CreatePerson(person);
-            _contactRepo.SaveChanges();
+            //_contactRepo.SaveChanges();
 
             //var createdPersonDto = _mapper.Map<PersonReadDto>(person);
             return Ok(personData);
@@ -39,7 +39,7 @@ namespace ContactApplication.Controllers
         public ActionResult<PersonCreateDto> DeletePerson(Guid personId)
         {
             _contactRepo.DeletePerson(personId);
-            _contactRepo.SaveChanges();
+            //_contactRepo.SaveChanges();
             
             //var createdPersonDto = _mapper.Map<PersonReadDto>(person);
             return Ok();
@@ -84,7 +84,7 @@ namespace ContactApplication.Controllers
             var contact = _mapper.Map<ContactInformation>(createDto);
 
             _contactRepo.AddContactInformation(contact, personId);
-            _contactRepo.SaveChanges();
+            //_contactRepo.SaveChanges();
 
             var detailed = _contactRepo.GetPersonDetailedById(personId);
             var createdPersonDetailedDto = _mapper.Map<PersonContactDetailedReadDto>(detailed);
@@ -105,7 +105,7 @@ namespace ContactApplication.Controllers
             }
             
             _contactRepo.DeleteContactInformation(contactId, personId);
-            _contactRepo.SaveChanges();
+            //_contactRepo.SaveChanges();
 
 
             //var createdPersonDto = _mapper.Map<PersonReadDto>(person);

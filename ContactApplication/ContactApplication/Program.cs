@@ -1,4 +1,6 @@
 using ContactApplication.Data;
+using ContactApplication.EventProcessor;
+using ContactApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,17 +19,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IContactRepo, ContactRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddHostedService<ContactService>();
+builder.Services.AddSingleton<IEventProcessor,EventProcessor>();
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+/*
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 
 }
-
+*/
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

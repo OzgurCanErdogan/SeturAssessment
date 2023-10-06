@@ -1,4 +1,5 @@
 ﻿using ReportApplication.Models;
+using System;
 
 namespace ReportApplication.Data
 {
@@ -11,6 +12,21 @@ namespace ReportApplication.Data
         }
 
         //IReportRepo Implemantation
+        public void CreateReport(Report report)
+        {
+            
+            _context.Reports.Add(report);
+            SaveChanges();
+        }
+        public void CreateReportDetail(ReportDetails reportDetails)
+        {
+            if (reportDetails == null)
+            {
+                throw new ArgumentNullException(nameof(reportDetails));
+            }
+            _context.ReportDetails.Add(reportDetails);
+            SaveChanges();
+        }
         public IEnumerable<Report> GetAllReports()
         {
             return _context.Reports.ToList();
@@ -25,7 +41,15 @@ namespace ReportApplication.Data
         {
             return _context.ReportDetails.FirstOrDefault(p => p.ReportId == id);
         }
-
+        public IEnumerable<Report> GetAllReportsWithCompletedStatus()
+        {
+            return _context.Reports.Where(p=>p.Status == ReportStatus.Created).ToList();
+        }
         
+        private bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
     }
 }

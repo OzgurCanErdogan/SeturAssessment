@@ -48,7 +48,10 @@ namespace ContactApplication.Data
         {
             return _context.Person.ToList();
         }
-
+        public IEnumerable<Person> GetAllDetailed()
+        {
+            return _context.Person.Include(p => p.ContactInformation).ToList();
+        }
 
         //IContactInformationRepo Implemantation
         public ContactInformation GetContactInformation(Guid id)
@@ -95,6 +98,30 @@ namespace ContactApplication.Data
         private bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public void CreateReportDetail(Guid reportId, byte[] file)
+        {
+            ReportDetails reportDetails = new ReportDetails();
+            reportDetails.ReportId = reportId;
+            reportDetails.ReportByte = file;
+            _context.ReportDetails.Add(reportDetails);
+            SaveChanges();
+        }
+
+        public void UpdateReportStatus(Guid reportId)
+        {
+            Report report = _context.Reports.FirstOrDefault(p=> p.Id == reportId);
+            if (report != null)
+            {
+                report.Status = ReportStatus.Created;
+                _context.Update(report);
+                SaveChanges();
+            }
+        }
+        public bool IsReportExist(Guid reportId)
+        {
+            return _context.Reports.Any(p => p.Id == reportId);
         }
     }
 }

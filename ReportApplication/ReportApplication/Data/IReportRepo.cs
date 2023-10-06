@@ -7,6 +7,9 @@ namespace ReportApplication.Data
         Report GetReportById(Guid id);
         IEnumerable<Report> GetAllReports();
         ReportDetails GetReportDetailsById(Guid id);
+        void CreateReport(Report report);
+        void CreateReportDetail(ReportDetails reportDetails);
+        IEnumerable<Report> GetAllReportsWithCompletedStatus();
 
     }
 }

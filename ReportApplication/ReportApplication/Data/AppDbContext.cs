@@ -8,6 +8,7 @@ namespace ReportApplication.Data
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
             this.Database.EnsureCreated();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public DbSet<Report> Reports { get; set; }

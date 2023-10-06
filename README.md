@@ -51,12 +51,15 @@ ReportByte |
 - Intall RabbitMQ from (https://www.rabbitmq.com/install-windows.html#downloads)
 - Install PostgreSql from (https://www.postgresql.org/download/windows/)
 - IIS Expres
+- Both Project should be running at the same time. First run Contact application since it creates the database tables, then run Report application.
 
 For Postgres: "User ID=postgres;Password=admin123;Host=localhost;Port=5432;Database=postgres;"
 
 For RabbitMQ:   "RabbitMQHost": "localhost","RabbitMQPort": "5672"
 
 These values are in solutions' appsettings.json. If you want to work with different ports or different passwords or other setting you should change these values.
+
+If projects' ports are used with different apps, you can change through launcSettings.json 
 
 My aim was prepare the containers to work in docker and then publish the solution. Unfortunately, I couldn't have enough time for it.
 
